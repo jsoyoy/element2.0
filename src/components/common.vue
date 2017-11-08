@@ -1,6 +1,7 @@
 <template>
   <el-row class="section">
     <el-col :push="4" :span="16">
+      <hr>
       <slot name="h"></slot>
       <slot name="t"></slot>
       <slot name="c"></slot>

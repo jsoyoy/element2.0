@@ -132,14 +132,7 @@
       <p slot="t">新增 reserve-keyword 属性，用于在选择某个选项后保留当前的搜索关键词</p>
       <div slot="c">
         <!--<p class="code"><span></span></p>-->
-        <img width="100%" src="../assets/reserve-keyword.png" alt="">
-      </div>
-    </com>
-    <com>
-      <h2 slot="h"><i class="el-icon-edit"></i></h2>
-      <p slot="t"></p>
-      <div slot="c">
-        <!--<p class="code"><span></span></p>-->
+        <img width="60%" src="../assets/reserve-keyword.png" alt="">
       </div>
     </com>
     <com>
@@ -149,7 +142,103 @@
         由于 on-* 属性在 JSX 中会被识别为事件，导致 Switch 所有 on-* 属性在 JSX 中无法正常工作，所以 on-* 属性更名为 active-*，对应地，off-* 属性更名为 inactive-*。
       </div>
     </com>
-
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>TimePicker</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. 可以用方向键导航，用 Enter 选中时间</li>
+          <li>2. 新增 start-placeholder 和 end-placeholder，用于设置范围选择时两个输入框的占位符(Datepicker)</li>
+          <li>3. 新增 arrow-control 属性，提供另一种交互形式(DateTimePicker)</li>
+        </ul>
+        <p class="code">
+          is-range <br>
+          range-separator="至" <br>
+          arrow-control <br>
+          start-placeholder="start-placeholder"<br>
+          end-placeholder="end-placeholder" <br>
+        </p>
+        <el-time-picker
+          is-range
+          range-separator="至"
+          arrow-control
+          start-placeholder="start-placeholder"
+          end-placeholder="end-placeholder"
+          placeholder="选择时间范围">
+        </el-time-picker>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Datepicker</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. type 为 datetimerange 时可以使用 timeFormat 格式化时间选择器 #6052<br></li>
+          <li>2. 新增 start-placeholder 和 end-placeholder，用于设置范围选择时两个输入框的占位符 #7169<br></li>
+          <li>3. 新增 value-format 属性，支持对绑定值的格式进行自定义，#7367<br></li>
+          <li>4. 新增 unlink-panels 属性，用于在选择日期范围时取消两个日期面板之间的联动<br></li>
+        </ul>
+        <p>{{datepicker1}}</p>
+        <el-date-picker
+          v-model="datepicker1"
+          type="datetimerange"
+          align="right"
+          range-separator="至"
+          unlink-panels
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd: HH小时：mm分：ss秒"
+          :picker-options="pickerOptions2">
+        </el-date-picker>
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Upload 上传</h2>
+      <p slot="t">
+        新增 limit 和 on-exceed 属性，支持对上传文件的个数进行限制
+      </p>
+      <div slot="c">
+        1. limit	最大允许上传个数 <br>
+        2. on-exceed	文件超出个数限制时的钩子 <br>
+        <p class="code">
+          :on-exceed="handleExceed" <br><br>
+          handleExceed(files, fileList) {  <br>
+            this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+          }
+        </p>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Rate</h2>
+      <p slot="t">text-template 属性更名为 score-template</p>
+      <div slot="c">
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Form</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. 新增 inline-message 属性，设置后校验信息会以行内样式显示<br></li>
+          <li>2. 新增 status-icon 属性，用于在输入框中显示校验结果反馈图标 <br></li>
+          <li>3. Form 和 FormItem 新增 size 属性，用于控制表单内组件的尺寸<br></li>
+          <li>4. validate 方法在不传入 callback 的情况下返回 promise，<br></li>
+          <li>5. 新增 clearValidate 方法，用于清空所有表单项的验证信息<br></li>
+        </ul>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Table</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
     <com>
       <h2 slot="h"><i class="el-icon-edit"></i></h2>
       <p slot="t"></p>
@@ -157,7 +246,6 @@
         <!--<p class="code"><span></span></p>-->
       </div>
     </com>
-
   </div>
 </template>
 
@@ -167,7 +255,9 @@
     data () {
       return {
         input1: '',
-        input2: ''
+        input2: '',
+        pickerOptions2: {},
+        datepicker1: ''
       }
     },
     methods: {
@@ -201,8 +291,11 @@
   li {
     display: inline-block;
     margin: 0 10px;
+    line-height: 30px;
   }
-
+  p{
+    line-height: 30px;
+  }
   a {
     color: #42b983;
   }
