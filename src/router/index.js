@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import TestMessageBox from '@/components/TestMessageBox.vue'
+// import TestMessageBox from '@/components/TestMessageBox.vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css'
+
+import HelloWorld from '@/components/HelloWorld'
+import Newvue from '@/pages/Newvue/Newvue'
 
 Vue.use(Router)
 Vue.use(Element, { size: 'small' })
@@ -12,14 +14,14 @@ Vue.use(Element, { size: 'small' })
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
+      path: '/Element',
+      name: 'HelloWorld',
       component: HelloWorld
     },
     {
-      path: '/TestMessageBox',
-      name: 'TestMessageBox',
-      component: TestMessageBox
+      path: '/Newvue',
+      name: 'Newvue',
+      component: Newvue
     }
   ]
 })

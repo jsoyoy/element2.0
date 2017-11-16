@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <router-view/>
+
+    <router-link to="/Element">Element2.5</router-link>
+    <router-link to="/Newvue">VUE2.5</router-link>
+    <el-row>
+      <el-col :push="4" :span="16"><router-view></router-view></el-col>
+    </el-row>
+
   </div>
 </template>
 

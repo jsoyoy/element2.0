@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <el-row>
-      <el-col :push="4"><h1>Element2.0新特性</h1></el-col>
+      <el-col><h1>Element2.0新特性</h1></el-col>
     </el-row>
     <com>
       <h2 slot="h"><i class="el-icon-edit"></i>综合</h2>
