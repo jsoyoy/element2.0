@@ -47,7 +47,7 @@
       <h2 slot="h"><i class="el-icon-edit"></i>Layout布局(基于断点的隐藏类)</h2>
       <p slot="t"></p>
       <div slot="c">
-        <p class="code hidden-md-and-down">
+        <p class="code hidden-sm-and-down">
           <span>// 首先，引入</span> <br>
           import 'element-ui/lib/theme-chalk/display.css';<br><br>
           <span>// 在DOM 元素或自定义组件上添加以下类名</span><br>
@@ -102,6 +102,18 @@
       </div>
     </com>
     <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Tree</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. 子节点在首次被展开之前不进行渲染 <br>(多选父节点，子节点过多，子节点又是异步加载，会触发多次请求，影响页面性能) </li>
+          <li>2. 新增 check-descendants 属性，设置 lazy 模式下勾选节点时，是否完全展开整个子树 <br> </li>
+        </ul>
+        <testtree></testtree>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
       <h2 slot="h"><i class="el-icon-edit"></i>input</h2>
       <!--<p slot="t">新增 suffix、prefix 的 slot，以及 prefix-icon、prefix-icon 属性，用于给输入框内部增加前置和后置内容</p>-->
       <ul slot="t">
@@ -132,7 +144,7 @@
       <p slot="t">新增 reserve-keyword 属性，用于在选择某个选项后保留当前的搜索关键词</p>
       <div slot="c">
         <!--<p class="code"><span></span></p>-->
-        <img width="60%" src="../assets/reserve-keyword.png" alt="">
+        <img width="100%" src="../assets/reserve-keyword.png" alt="">
       </div>
     </com>
     <com>
@@ -185,7 +197,7 @@
           type="datetimerange"
           align="right"
           range-separator="至"
-          unlink-panels
+          :unlink-panels="false"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           format="yyyy 年 MM 月 dd 日"
@@ -204,9 +216,10 @@
         2. on-exceed	文件超出个数限制时的钩子 <br>
         <p class="code">
           :on-exceed="handleExceed" <br><br>
+          <span> // files当前选择的文件，fileList已选择的文件</span><br>
           handleExceed(files, fileList) {  <br>
-            this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-          }
+            &nbsp&nbsp this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+          }<br>
         </p>
         <!--<p class="code"><span></span></p>-->
       </div>
@@ -223,18 +236,97 @@
       <p slot="t"></p>
       <div slot="c">
         <ul>
-          <li>1. 新增 inline-message 属性，设置后校验信息会以行内样式显示<br></li>
-          <li>2. 新增 status-icon 属性，用于在输入框中显示校验结果反馈图标 <br></li>
-          <li>3. Form 和 FormItem 新增 size 属性，用于控制表单内组件的尺寸<br></li>
-          <li>4. validate 方法在不传入 callback 的情况下返回 promise，<br></li>
-          <li>5. 新增 clearValidate 方法，用于清空所有表单项的验证信息<br></li>
+          <li>1. 新增 inline-message 属性，设置后校验信息会以行内样式显示</li><br>
+          <li>2. 新增 status-icon 属性，用于在输入框中显示校验结果反馈图标 </li><br>
+          <li>3. Form 和 FormItem 新增 size 属性，用于控制表单内组件的尺寸</li><br>
+          <li>4. validate 方法在不传入 callback 的情况下返回 promise</li><br>
+          <li>5. 新增 clearValidate 方法，用于清空所有表单项的验证信息</li>
         </ul>
         <!--<p class="code"><span></span></p>-->
+        <test-form></test-form>
       </div>
     </com>
     <com>
       <h2 slot="h"><i class="el-icon-edit"></i>Table</h2>
       <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. 新增 span-method 属性，用于合并行或列 <br> (参数 ：当前行row、当前列column、当前行号rowIndex、当前列号columnIndex) </li><br>
+          <li>2. 新增 clearSort 方法，用于清空排序状态 </li><br>
+          <li>3. 新增 clearFilter 方法，用于清空过滤状态</li><br>
+          <li>4. 对于可展开行，当该行展开时会获得一个 .expanded 类名，方便自定义样式</li><br>
+          <li>5 .新增 size 属性，用于控制表格尺寸 </li><br>
+          <li>6. 新增 toggleRowExpansion 方法，用于手动展开或关闭行</li><br>
+          <li>7. 新增 cell-class-name 属性，用于指定单元格的类名</li><br>
+          <li>8. 新增 cell-style 属性，用于指定单元格的样式 </li><br>
+          <li>9. 新增 header-row-class-name 属性，用于指定表头行的类名</li><br>
+          <li>10. 新增 header-row-style 属性，用于指定表头行的样式</li><br>
+          <li>11. 新增 header-cell-class-name 属性，用于指定表头单元格的类名</li><br>
+          <li>12. 新增 header-cell-style 属性，用于指定表头单元格的样式 </li><br>
+          <li>13. TableColumn 的 prop 属性支持 object[key] 格式 </li><br>
+          <li>14. TableColumn 新增 index 属性，用于自定义索引值 </li><br>
+        </ul>
+        <test-table></test-table>
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Dialog</h2>
+      <p slot="t">
+        1. 新增 width、fullscreen、append-to-body 属性，支持嵌套使用 <br>
+        2. 新增 center 属性，提供居中布局 <br>
+        3. 新增 focus-after-closed、focus-after-open属性，支持无障碍访问 <br>
+      </p>
+      <div slot="c">
+        <test-dialog></test-dialog>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>MessageBox</h2>
+      <div slot="t">
+        1. 新增 closeOnHashChange 属性 <br>
+        <router-link to="/TestMessageBox"><p>跳转路由</p></router-link>
+        (解决的问题：快速创建的alert是动态插入的，那么route改变的时候不会销毁动态插入的内容。) <br>
+        2. 新增 center 属性，提供居中布局  <br>
+        3. 新增 roundButton 属性，使得内部按钮为圆角按钮 <br>
+        4. 新增 dangerouslyUseHTMLString 属性，使得 message 支持传入 HTML 字符串(Notification) <br>
+        5.新增 inputType 属性，用户指定内部输入框的类型，<br>
+      </div>
+      <div slot="c">
+        <test-message-box></test-message-box>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 slot="h"><i class="el-icon-edit"></i>Notification</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>1. 新增 position 属性，用于配置 Notification 出现的位置 </li>
+          <li>2. 新增 dangerouslyUseHTMLString 属性，使得 message 属性支持传入 HTML 字符串</li>
+          <li>3. 新增 showClose 属性，用于隐藏关闭按钮</li>
+        </ul>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com>
+      <h2 @click="loading = false" slot="h"><i class="el-icon-edit"></i>Menu</h2>
+      <p slot="t"></p>
+      <div slot="c">
+        <ul>
+          <li>新增 background-color、text-color 和 active-text-color 属性，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色</li>
+          <li>新增 open 和 close 方法，支持手动打开和关闭 SubMenu（展开收起时的回调）</li>
+        </ul>
+        <!--<p class="code"><span></span></p>-->
+      </div>
+    </com>
+    <com
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)">
+      <h2 slot="h" @click="loading = true"><i class="el-icon-edit"></i>Loading</h2>
+      <p slot="t">配置对象新增 spinner 和 background 字段，支持自定义加载图标和背景色</p>
       <div slot="c">
         <!--<p class="code"><span></span></p>-->
       </div>
@@ -250,14 +342,31 @@
 </template>
 
 <script>
-  import com from './common.vue'
+  import Com from './common.vue'
+  import TestForm from './TestForm.vue'
+  import TestTable from './TestTable.vue'
+  import TestDialog from './TestDialog.vue'
+  import TestMessageBox from './TestMessageBox.vue'
+  import Testtree from './Testtree.vue'
   export default {
+    components: {
+      Com,
+      TestForm,
+      TestDialog,
+      TestMessageBox,
+      Testtree,
+      TestTable
+    },
     data () {
       return {
         input1: '',
         input2: '',
         pickerOptions2: {},
-        datepicker1: ''
+        datepicker1: '',
+        loading: false,
+        numberValidateForm: {
+          age: ''
+        }
       }
     },
     methods: {
@@ -270,9 +379,6 @@
       showInputIn () {
         alert(this.input2)
       }
-    },
-    components: {
-      com
     }
   }
 </script>
@@ -289,7 +395,7 @@
   }
 
   li {
-    display: inline-block;
+    display: block;
     margin: 0 10px;
     line-height: 30px;
   }
